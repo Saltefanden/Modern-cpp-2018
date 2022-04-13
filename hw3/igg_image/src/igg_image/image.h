@@ -30,6 +30,10 @@ class Image {
   Pixel& at(int row, int col);              // Non const getter setter
   const Pixel& at(int row, int col) const;  // const only getter
 
+  void DownScale(int scale);
+  void UpScale(int scale);
+
+
  private:
 
   // TODO: add missing private members when needed.

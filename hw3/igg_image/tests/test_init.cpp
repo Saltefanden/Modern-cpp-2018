@@ -45,3 +45,39 @@ TEST(ImageLibrary, SetGetPixelValues) {
 }
 
 
+TEST(ImageLibrary, DownScale){
+  igg::DummyIoStrategy test_strategy;
+  int rows{3};
+  int cols{3};
+
+  igg::Image image(rows, cols, test_strategy);
+
+  image.at(0,0) = {0, 255, 0};
+
+  image.DownScale(2);
+
+  EXPECT_EQ(image.rows(), 2);
+  EXPECT_EQ(image.cols(), 2);
+
+}
+
+TEST(ImageLibrary, UpScale){
+  igg::DummyIoStrategy test_strategy;
+  int rows{3};
+  int cols{3};
+
+  igg::Image image(rows, cols, test_strategy);
+
+  image.at(0,0) = {0, 255, 0};
+
+  image.UpScale(2);
+
+  EXPECT_EQ(image.rows(), 6);
+  EXPECT_EQ(image.cols(), 6);
+  EXPECT_EQ(image.at(0,0).green, image.at(1,1).green);
+  EXPECT_EQ(image.at(0,0).red, image.at(1,1).red);
+  EXPECT_EQ(image.at(0,0).blue, image.at(1,1).blue);
+  EXPECT_NE(image.at(0,0).green, image.at(2,2).green);
+}
+
+
