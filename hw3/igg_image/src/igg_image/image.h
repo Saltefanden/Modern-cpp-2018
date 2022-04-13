@@ -33,6 +33,8 @@ class Image {
   void DownScale(int scale);
   void UpScale(int scale);
 
+  bool ReadFromDisk(const std::string& file_name);
+  void WriteToDisk(const std::string& file_name);
 
  private:
 

@@ -54,4 +54,33 @@ namespace igg {
     data_ = new_data;
   }
 
+  bool Image::ReadFromDisk(const std::string& file_name){
+    // Read file_name into imagedata
+    ImageData imagedata = strategy.Read(file_name);
+    int image_size = imagedata.rows * imagedata.cols;
+
+    // Convert to Image class data
+    std::vector<int> red_vec = imagedata.data[0]; 
+    std::vector<int> green_vec = imagedata.data[1]; 
+    std::vector<int> blue_vec = imagedata.data[2]; 
+
+    std::vector<Pixel> file_data;
+    file_data.reserve(image_size);
+
+    for (int i=0; i < image_size; ++i){
+      Pixel current_pixel = {red_vec[i], green_vec[i], blue_vec[i]};
+      file_data.push_back(current_pixel);
+    }
+    
+    rows_ = imagedata.rows;
+    cols_ = imagedata.cols;
+    data_ = file_data;
+
+    return true;
+  }
+
+  void Image::WriteToDisk(const std::string& file_name){
+
+  }
+
 } // namespace igg
