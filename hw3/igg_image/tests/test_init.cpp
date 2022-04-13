@@ -1,5 +1,6 @@
 #include<gtest/gtest.h>
 #include<image.h>
+#include<dummy_strategy.h>
 #include<string>
 
 
@@ -80,4 +81,16 @@ TEST(ImageLibrary, UpScale){
   EXPECT_NE(image.at(0,0).green, image.at(2,2).green);
 }
 
+
+TEST(ImageLibrary, DummyStrategyRead){
+  igg::DummyIoStrategy test_strategy;
+  int rows{3};
+  int cols{3};
+  
+  igg::Image image(rows, cols, test_strategy);
+
+  image.ReadFromDisk("Lol");
+  
+
+}
 

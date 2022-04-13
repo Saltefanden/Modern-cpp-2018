@@ -4,9 +4,8 @@
 
 #pragma once
 
-#include <vector>
+#include<vector>
 #include<strategy.h>
-#include<dummy_strategy.h>
 
 
 namespace igg {

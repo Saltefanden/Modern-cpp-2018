@@ -58,7 +58,7 @@ namespace igg {
     // Read file_name into imagedata
     ImageData imagedata = strategy.Read(file_name);
     int image_size = imagedata.rows * imagedata.cols;
-
+    
     // Convert to Image class data
     std::vector<int> red_vec = imagedata.data[0]; 
     std::vector<int> green_vec = imagedata.data[1]; 
@@ -80,7 +80,7 @@ namespace igg {
   }
 
   void Image::WriteToDisk(const std::string& file_name){
-
+    
   }
 
 } // namespace igg
