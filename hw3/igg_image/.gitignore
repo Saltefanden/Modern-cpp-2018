@@ -2,6 +2,7 @@ data/
 build/
 bin/
 lib/
+*devcontainer/
 
 # Prerequisites
 *.d
