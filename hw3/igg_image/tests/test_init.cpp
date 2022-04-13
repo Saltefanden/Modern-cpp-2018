@@ -89,7 +89,19 @@ TEST(ImageLibrary, DummyStrategyRead){
   
   igg::Image image(rows, cols, test_strategy);
 
-  image.ReadFromDisk("Lol");
+  EXPECT_TRUE(image.ReadFromDisk("Lol"));
+
+  EXPECT_EQ(image.rows(), 0);
+}
+
+TEST(ImageLibrary, DummyStrategyWrite){
+  igg::DummyIoStrategy test_strategy;
+  int rows{3};
+  int cols{3};
+  
+  igg::Image image(rows, cols, test_strategy);
+
+  image.WriteToDisk("Lol");
   
 
 }

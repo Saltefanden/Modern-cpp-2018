@@ -58,6 +58,8 @@ namespace igg {
     // Read file_name into imagedata
     ImageData imagedata = strategy.Read(file_name);
     int image_size = imagedata.rows * imagedata.cols;
+    rows_ = imagedata.rows;
+    cols_ = imagedata.cols;
     
     if (image_size==0){ // Cannot assign any data, return early.
       return true;
@@ -76,15 +78,32 @@ namespace igg {
       file_data.push_back(current_pixel);
     }
     
-    rows_ = imagedata.rows;
-    cols_ = imagedata.cols;
     data_ = file_data;
 
     return true;
   }
 
   void Image::WriteToDisk(const std::string& file_name){
-    
+    std::vector<int> color_vec;
+    color_vec.reserve(rows_ * cols_);
+    std::vector<int> red_vec{color_vec};
+    std::vector<int> green_vec{color_vec};
+    std::vector<int> blue_vec{color_vec};
+
+    for (int row=0; row < rows_; ++row){
+      for (int col=0; col < cols_; ++col){
+        Pixel current_pixel = Image::at(row, col);
+        red_vec.push_back(current_pixel.red);
+        green_vec.push_back(current_pixel.green);
+        blue_vec.push_back(current_pixel.blue);
+      }
+    }
+
+    std::vector< std::vector<int> > data = {red_vec, green_vec, blue_vec};
+    ImageData writing_data{ rows_, cols_, max_val_, data };
+
+    strategy.Write(file_name, writing_data);
+
   }
 
 } // namespace igg
