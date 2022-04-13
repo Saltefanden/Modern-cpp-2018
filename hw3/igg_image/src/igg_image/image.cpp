@@ -59,6 +59,10 @@ namespace igg {
     ImageData imagedata = strategy.Read(file_name);
     int image_size = imagedata.rows * imagedata.cols;
     
+    if (image_size==0){ // Cannot assign any data, return early.
+      return true;
+    }
+    
     // Convert to Image class data
     std::vector<int> red_vec = imagedata.data[0]; 
     std::vector<int> green_vec = imagedata.data[1]; 
