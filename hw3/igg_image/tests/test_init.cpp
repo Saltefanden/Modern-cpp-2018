@@ -1,6 +1,7 @@
 #include<gtest/gtest.h>
 #include<image.h>
 #include<dummy_strategy.h>
+#include<png_strategy.h>
 #include<string>
 
 
@@ -102,7 +103,19 @@ TEST(ImageLibrary, DummyStrategyWrite){
   igg::Image image(rows, cols, test_strategy);
 
   image.WriteToDisk("Lol");
-  
-
 }
 
+
+TEST(ImageLibrary, PngStrategyReadWrite){
+  igg::PngIoStrategy test_strategy;
+  int rows{3};
+  int cols{3};
+  
+  igg::Image image(rows, cols, test_strategy);
+
+  EXPECT_TRUE(image.ReadFromDisk("../data/lena.png"));
+
+  image.DownScale(5);
+
+  image.WriteToDisk("../data/Pikkesovs.png");
+}
