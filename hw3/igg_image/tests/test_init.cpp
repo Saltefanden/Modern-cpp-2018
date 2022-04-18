@@ -109,10 +109,8 @@ TEST(ImageLibrary, DummyStrategyWrite){
 
 TEST(ImageLibrary, PngStrategyReadWrite){
   igg::PngIoStrategy test_strategy;
-  int rows{3};
-  int cols{3};
   
-  igg::Image image(rows, cols, test_strategy);
+  igg::Image image(test_strategy);
 
   EXPECT_TRUE(image.ReadFromDisk("../data/lena.png"));
 
@@ -123,10 +121,9 @@ TEST(ImageLibrary, PngStrategyReadWrite){
 
 TEST(ImageLibrary, PpmStrategyReadWrite){
   igg::PpmIoStrategy test_strategy;
-  int rows{3};
-  int cols{3};
+
   
-  igg::Image image(rows, cols, test_strategy);
+  igg::Image image(test_strategy);
 
   EXPECT_TRUE(image.ReadFromDisk("../data/pbmlib.ascii.ppm"));
 
