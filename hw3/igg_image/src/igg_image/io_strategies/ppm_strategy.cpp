@@ -7,23 +7,23 @@ namespace igg {
   
   void SetToDimensions(std::stringstream& my_sstream, ImageData& image_data){
     my_sstream >> image_data.rows >> image_data.cols;
-    int vector_size{ image_data.rows * image_data.cols };
-    image_data.data.reserve(3*vector_size); // Three channels? Will this be good enough?
+    // int vector_size{ image_data.rows * image_data.cols };
+    // image_data.data.reserve(3*vector_size); // Three channels? Will this be good enough?
   }
 
   void SetToMaxVal(std::stringstream& my_sstream, ImageData& image_data){
     my_sstream >> image_data.max_val;
   }
 
-  void SetToData(std::stringstream& my_sstream, std::vector<int>& red_vec, std::vector<int>& green_vec, std::vector<int>& blue_vec) {
+  void SetToData(std::stringstream& my_sstream, ImageData& image_data) {
     int red_val;
     int green_val;
     int blue_val;
 
     while (my_sstream >> red_val >> green_val >> blue_val) {
-      red_vec.push_back(red_val);
-      green_vec.push_back(green_val);
-      blue_vec.push_back(blue_val);
+      image_data.data[0].push_back(red_val);
+      image_data.data[1].push_back(green_val);
+      image_data.data[2].push_back(blue_val);
     }
   }
 
@@ -54,12 +54,10 @@ namespace igg {
     image_data.rows = sentinel;
     image_data.cols = sentinel;
     image_data.max_val = sentinel;
-
+    image_data.data = {{},{},{}};
     std::ifstream input_filestream(file_name);
     std::string line;
-    std::vector<int> red_vec;
-    std::vector<int> green_vec;
-    std::vector<int> blue_vec;
+
     while ( std::getline(input_filestream, line) ) {
       
       int first_char{ std::tolower(line[0]) }; 
@@ -70,17 +68,13 @@ namespace igg {
 
       if (image_data.rows == sentinel && image_data.cols == sentinel) { 
         SetToDimensions(my_sstream, image_data);
-        red_vec.reserve(image_data.rows * image_data.cols);
-        green_vec.reserve(image_data.rows * image_data.cols);
-        blue_vec.reserve(image_data.rows * image_data.cols);
       } else if (image_data.max_val == sentinel) {
         SetToMaxVal(my_sstream, image_data);
       } else {
-        SetToData(my_sstream, red_vec, green_vec, blue_vec);
+        SetToData(my_sstream, image_data);
       } // endif
-
     }
-    image_data.data = {red_vec, green_vec, blue_vec};
+
     return image_data;
   }
 
