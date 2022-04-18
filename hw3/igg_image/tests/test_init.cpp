@@ -2,6 +2,7 @@
 #include<image.h>
 #include<dummy_strategy.h>
 #include<png_strategy.h>
+#include<ppm_strategy.h>
 #include<string>
 
 
@@ -119,3 +120,17 @@ TEST(ImageLibrary, PngStrategyReadWrite){
 
   image.WriteToDisk("../data/Pikkesovs.png");
 }
+
+TEST(ImageLibrary, PpmStrategyReadWrite){
+  igg::PpmIoStrategy test_strategy;
+  int rows{3};
+  int cols{3};
+  
+  igg::Image image(rows, cols, test_strategy);
+
+  EXPECT_TRUE(image.ReadFromDisk("../data/pbmlib.ascii.ppm"));
+
+  image.WriteToDisk("../data/lol.ppm");
+}
+
+

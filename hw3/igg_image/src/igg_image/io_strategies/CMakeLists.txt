@@ -5,6 +5,9 @@ add_library(strategies
             ppm_strategy.cpp)
 # TODO: link strategies against needed libraries.
 
+include_directories(${PROJECT_SOURCE_DIR}/src/igg_image/
+                    ${PROJECT_SOURCE_DIR}/src/igg_image/io_strategies/)
+
 find_package(PNG REQUIRED)
 
 # message(!!!!!!!!!!!  ${PNG_LIBRARY})

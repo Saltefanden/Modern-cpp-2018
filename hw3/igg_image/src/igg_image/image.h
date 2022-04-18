@@ -35,6 +35,8 @@ class Image {
   bool ReadFromDisk(const std::string& file_name);
   void WriteToDisk(const std::string& file_name);
 
+  const std::vector<Pixel>& GetData() const;
+
  private:
 
   // TODO: add missing private members when needed.

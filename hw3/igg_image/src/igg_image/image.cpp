@@ -106,4 +106,8 @@ namespace igg {
 
   }
 
+  const std::vector<Image::Pixel>& Image::GetData() const{
+    return data_;
+  }
+
 } // namespace igg
