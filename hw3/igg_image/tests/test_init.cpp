@@ -130,4 +130,21 @@ TEST(ImageLibrary, PpmStrategyReadWrite){
   image.WriteToDisk("../data/lol.ppm");
 }
 
+TEST(ImageLibrary, PpmToPng){
+  igg::PpmIoStrategy input_strategy;
+  igg::PngIoStrategy output_strategy;
+  igg::Image input_image(input_strategy);
+  EXPECT_TRUE(input_image.ReadFromDisk("../data/pbmlib.ascii.ppm"));
+  igg::Image output_image(input_image.rows(), input_image.cols(), output_strategy);
+
+  for (int row=0; row<input_image.rows(); ++row){
+    for (int col=0; col<input_image.cols(); ++col){
+      output_image.at(row, col) = input_image.at(row, col);
+    }
+  }
+
+
+  output_image.WriteToDisk("../data/the_image_in.png");
+}
+
 
